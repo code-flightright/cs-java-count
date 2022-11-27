@@ -1,4 +1,4 @@
-package com.example.csvcounter.service;
+package com.example.csvcounter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

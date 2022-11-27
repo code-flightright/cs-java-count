@@ -1,5 +1,7 @@
 package com.example.csvcounter.visit;
 
+import com.example.csvcounter.visit.Visit;
+import com.example.csvcounter.visit.VisitCounter;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
