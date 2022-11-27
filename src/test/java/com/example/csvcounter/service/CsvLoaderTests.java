@@ -1,4 +1,4 @@
-package com.example.csvcounter;
+package com.example.csvcounter.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,8 +30,8 @@ class CsvLoaderTests {
 
     List<Visit> visits = loader.load(new ByteArrayInputStream(input.getBytes()));
     assertThat(visits).contains(
-        new Visit("test@test.com", "123", "google.com"),
-        new Visit("nest@nest.com", "444", "google.com"));
+        Visit.builder().email("test@test.com").phoneNumber("123").source("google.com").build(),
+        Visit.builder().email("nest@nest.com").phoneNumber("444").source("google.com").build());
   }
 
   @Test
