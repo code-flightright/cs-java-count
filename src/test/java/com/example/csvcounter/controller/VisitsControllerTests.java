@@ -1,11 +1,13 @@
 package com.example.csvcounter.controller;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.csvcounter.service.CsvLoader;
+import com.example.csvcounter.service.CsvCounter;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,10 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest
-@MockBean(classes = {CsvLoader.class})
 class VisitsControllerTests {
+
+  @MockBean
+  private CsvCounter counter;
 
   public static final byte[] INPUT = """
       phone,email,source
@@ -47,6 +51,8 @@ class VisitsControllerTests {
   @Test
   @SneakyThrows
   void shouldReturnVisitTotal() {
+
+    when(counter.countVisits(any())).thenReturn(2L);
 
     mvc.perform(
             multipart("/visits").file(new MockMultipartFile("file", INPUT))

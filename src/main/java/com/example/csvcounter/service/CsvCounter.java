@@ -6,22 +6,36 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
+import java.util.HashMap;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CsvLoader {
+@Log4j2
+public class CsvCounter {
 
   private static final CsvMapper MAPPER = new CsvMapper();
 
-  public List<Visit> load(InputStream input) throws IOException {
+  public long countVisits(InputStream input) throws IOException {
 
     CsvSchema schema = MAPPER.schemaFor(Visit.class);
     try (MappingIterator<Visit> it = MAPPER.readerFor(Visit.class)
         .with(schema.withHeader())
         .readValues(input)) {
-      return it.readAll();
+      var knowVisits = new HashMap<Visit, Boolean>();
+      long visits = 0;
+      while (it.hasNext()) {
+        if (isNewVisit(knowVisits, it.next())) {
+          visits++;
+        }
+      }
+      log.info("visits {}", visits);
+      return visits;
     }
-
   }
+
+  private static boolean isNewVisit(HashMap<Visit, Boolean> knowVisits, Visit visit) {
+    return null == knowVisits.putIfAbsent(visit, Boolean.TRUE);
+  }
+
 }
