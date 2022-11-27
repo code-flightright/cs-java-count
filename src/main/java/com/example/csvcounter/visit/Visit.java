@@ -1,7 +1,5 @@
 package com.example.csvcounter.visit;
 
-import static org.springframework.util.StringUtils.hasText;
-
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
@@ -17,7 +15,4 @@ public class Visit {
   @EqualsAndHashCode.Exclude
   String source;
 
-  public boolean hasNull() {
-    return !(hasText(email) && hasText(phoneNumber) && hasText(source));
-  }
 }

@@ -2,6 +2,7 @@ package com.example.csvcounter.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.csvcounter.visit.VisitValidator;
 import java.io.ByteArrayInputStream;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,7 @@ class CsvCounterTests {
 
   @BeforeEach
   void setup() {
-    counter = new CsvCounter();
+    counter = new CsvCounter(VisitValidator::hasNoEmptyFields);
   }
 
   @Test
