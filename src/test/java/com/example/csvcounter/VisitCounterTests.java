@@ -32,4 +32,16 @@ class VisitCounterTests {
     Assertions.assertThat(visits).isEqualTo(2);
   }
 
+  @Test
+  void shouldNotCountNullFields() {
+    long visits = visitCounter.count(List.of(
+        new Visit("test@test.com", "123", "google.com"),
+        new Visit(null, "123", "google.com"),
+        new Visit("test@test.com", null, "meta.com"),
+        new Visit("test1@test.com", "321", "google.com"),
+        new Visit("test1@test.com", "321", null)));
+    Assertions.assertThat(visits).isEqualTo(2);
+
+  }
+
 }

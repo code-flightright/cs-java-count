@@ -1,5 +1,7 @@
 package com.example.csvcounter;
 
+import static java.util.function.Predicate.not;
+
 import java.util.Collection;
 
 public class VisitCounter {
@@ -8,6 +10,7 @@ public class VisitCounter {
     return visits.stream()
         .parallel()
         .unordered()
+        .filter(not(Visit::hasNull))
         .distinct()
         .count();
   }

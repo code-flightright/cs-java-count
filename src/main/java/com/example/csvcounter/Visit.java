@@ -10,4 +10,8 @@ public class Visit {
   String phoneNumber;
   @EqualsAndHashCode.Exclude
   String source;
+
+  public boolean hasNull() {
+    return null == email || null == phoneNumber || null == source;
+  }
 }
