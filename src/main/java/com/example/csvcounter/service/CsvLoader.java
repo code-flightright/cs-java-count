@@ -1,5 +1,6 @@
-package com.example.csvcounter;
+package com.example.csvcounter.service;
 
+import com.example.csvcounter.visit.Visit;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;

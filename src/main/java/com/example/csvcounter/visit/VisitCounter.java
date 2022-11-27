@@ -1,4 +1,4 @@
-package com.example.csvcounter;
+package com.example.csvcounter.visit;
 
 import static java.util.function.Predicate.not;
 

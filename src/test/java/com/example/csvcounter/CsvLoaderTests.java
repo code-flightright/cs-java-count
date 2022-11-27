@@ -2,6 +2,8 @@ package com.example.csvcounter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.csvcounter.service.CsvLoader;
+import com.example.csvcounter.visit.Visit;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import lombok.SneakyThrows;

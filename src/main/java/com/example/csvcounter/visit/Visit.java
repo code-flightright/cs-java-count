@@ -1,4 +1,4 @@
-package com.example.csvcounter;
+package com.example.csvcounter.visit;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

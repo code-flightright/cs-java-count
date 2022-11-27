@@ -1,4 +1,4 @@
-package com.example.csvcounter;
+package com.example.csvcounter.controller;
 
 import lombok.Value;
 
