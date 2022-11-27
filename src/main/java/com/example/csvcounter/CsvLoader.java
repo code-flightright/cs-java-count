@@ -6,7 +6,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CsvLoader {
 
   private static final CsvMapper MAPPER = new CsvMapper();
