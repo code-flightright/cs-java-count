@@ -2,6 +2,9 @@ package com.example.csvcounter.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.csvcounter.service.CsvCounter.VisitKeyWrapper;
+import com.example.csvcounter.visit.PhoneAndMailHasher;
+import com.example.csvcounter.visit.Visit;
 import com.example.csvcounter.visit.VisitValidator;
 import java.io.ByteArrayInputStream;
 import lombok.SneakyThrows;
@@ -15,7 +18,7 @@ class CsvCounterTests {
 
   @BeforeEach
   void setup() {
-    counter = new CsvCounter(VisitValidator::hasNoEmptyFields);
+    counter = new CsvCounter(VisitValidator::hasNoEmptyFields, new PhoneAndMailHasher());
   }
 
   @Test
@@ -39,6 +42,26 @@ class CsvCounterTests {
     var input = new ClassPathResource("test_100mb.csv").getInputStream();
     var visits = counter.countVisits(input);
     assertThat(visits).isNotZero();
+  }
+
+  @Test
+  void wrapperShouldBeEqualIfVisitsAreEquals() {
+    PhoneAndMailHasher hasher = new PhoneAndMailHasher();
+    var wrapper1 = new VisitKeyWrapper(
+        Visit.builder().email("mail").phoneNumber("phone").source("source").build(), hasher);
+    var wrapper2 = new VisitKeyWrapper(Visit.builder().email("mail").phoneNumber("phone").build(),
+        hasher);
+
+    assertThat(wrapper1).isEqualTo(wrapper2);
+  }
+
+  @Test
+  void wrapperShouldBeEqualIfSame() {
+    var wrapper1 = new VisitKeyWrapper(
+        Visit.builder().email("mail").phoneNumber("phone").source("source").build(),
+        new PhoneAndMailHasher());
+
+    assertThat(wrapper1).isEqualTo(wrapper1);
   }
 
 }
