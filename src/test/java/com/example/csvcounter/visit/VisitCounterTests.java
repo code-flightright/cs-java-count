@@ -1,4 +1,4 @@
-package com.example.csvcounter;
+package com.example.csvcounter.visit;
 
 import java.util.List;
 import org.assertj.core.api.Assertions;

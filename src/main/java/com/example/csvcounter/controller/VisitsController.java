@@ -1,6 +1,7 @@
-package com.example.csvcounter;
+package com.example.csvcounter.controller;
 
-import com.example.csvcounter.VisitsResult.VisitSummary;
+import com.example.csvcounter.controller.VisitsResult.VisitSummary;
+import com.example.csvcounter.service.CsvLoader;
 import java.nio.file.Path;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
