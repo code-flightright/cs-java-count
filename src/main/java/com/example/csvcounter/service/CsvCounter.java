@@ -35,7 +35,7 @@ public class CsvCounter {
   }
 
   private static boolean isNewVisit(HashMap<Visit, Boolean> knowVisits, Visit visit) {
-    return null == knowVisits.putIfAbsent(visit, Boolean.TRUE);
+    return !visit.hasNull() && null == knowVisits.putIfAbsent(visit, Boolean.TRUE);
   }
 
 }

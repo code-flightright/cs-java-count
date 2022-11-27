@@ -19,7 +19,7 @@ class CsvCounterTests {
 
   @Test
   @SneakyThrows
-  void shouldParseFileWithNulls() {
+  void shouldNotCountNullables() {
     var input = """
         phone,email,source
         test@test.com,,google.com
@@ -29,7 +29,7 @@ class CsvCounterTests {
         """;
 
     var visits = counter.countVisits(new ByteArrayInputStream(input.getBytes()));
-    assertThat(visits).isEqualTo(4);
+    assertThat(visits).isZero();
   }
 
   @Test
