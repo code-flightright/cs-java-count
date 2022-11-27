@@ -9,11 +9,9 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.function.Predicate;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 @Component
-@Log4j2
 @RequiredArgsConstructor
 public class CsvCounter {
 
@@ -23,10 +21,7 @@ public class CsvCounter {
 
   public long countVisits(InputStream input) throws IOException {
 
-    CsvSchema schema = MAPPER.schemaFor(Visit.class);
-    try (MappingIterator<Visit> it = MAPPER.readerFor(Visit.class)
-        .with(schema.withHeader())
-        .readValues(input)) {
+    try (MappingIterator<Visit> it = getIterator(input)) {
       var knowVisits = new HashMap<Visit, Boolean>();
       long visits = 0;
       while (it.hasNext()) {
@@ -34,9 +29,16 @@ public class CsvCounter {
           visits++;
         }
       }
-      log.info("visits {}", visits);
       return visits;
     }
+  }
+
+  private static MappingIterator<Visit> getIterator(InputStream input)
+      throws IOException {
+    CsvSchema schema = MAPPER.schemaFor(Visit.class);
+    return MAPPER.readerFor(Visit.class)
+        .with(schema.withHeader())
+        .readValues(input);
   }
 
   private boolean isNewVisit(HashMap<Visit, Boolean> knowVisits, Visit visit) {

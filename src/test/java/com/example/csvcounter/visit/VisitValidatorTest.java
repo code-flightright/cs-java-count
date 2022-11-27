@@ -2,6 +2,7 @@ package com.example.csvcounter.visit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,5 +18,12 @@ class VisitValidatorTest {
     var visit = new Visit(email, phone, source);
     boolean result = VisitValidator.hasNoEmptyFields(visit);
     assertThat(result).isFalse();
+  }
+
+  @Test
+  void shouldReturnTrueIfAllHaveValue() {
+    var visit = new Visit("email", "phone", "source");
+    boolean result = VisitValidator.hasNoEmptyFields(visit);
+    assertThat(result).isTrue();
   }
 }
