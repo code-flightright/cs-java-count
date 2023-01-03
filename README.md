@@ -19,7 +19,7 @@ test1@test.com,321,google.com
 - Ignore csv entries with any nullable field
 - Just print the results to any output
 - The application is not a single-use script, so should be designed to be supportable
-- The filename should be passed via a REST Endpoint, but should not be hardcoded.
+- The filename should be passed in any convenient way (preferably via REST API endpoint), but should not be hardcoded.
 
 
 ### The bonus:
